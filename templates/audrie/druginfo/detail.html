@@ -1,0 +1,23 @@
+{% extends "audrie/base.html" %}
+
+{% block title %}{{ drug.drugname }}{% endblock %}
+
+{% block content %}
+  <h1>{{ drug.drugname }}</h1>
+    <table style="width:100%">
+  <tr>
+    <th>drugbankID</th>
+    <th>Description</th>
+    <th>Confirmstatus</th>
+    <th>smiles</th>
+  </tr>
+  <tr>
+    <td>{{ drug.drugbankID|linebreaks }}</td>
+    <td>{{ drug.description|linebreaks }}</td>
+    <td>{{ drug.confirmStatus|linebreaks }}</td>
+      <td>{{ drug.smiles|linebreaks }}</td>
+  </tr>
+</table>
+    <p>To understand the example better, we have added borders to the table.</p>
+
+{% endblock %}
