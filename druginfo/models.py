@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -32,6 +33,9 @@ class DrugInformation(models.Model):
 
     def __str__(self):
         return self.drugname
+    def get_absolute_url(self):
+        return reverse('druginfo:drug_detail',
+                       args=[self.id])
 
 
 

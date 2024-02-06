@@ -6,11 +6,12 @@
   <h1>drugs</h1>
   {% for drug in drugs %}
     <h2>
-      <a href="{% url 'druginfo:drug_detail' drug.id %}">
+      <a href="{{ drug.get_absolute_url }}">
         {{ drug.drugname }}
       </a>
     </h2>
 
     {{ drug.drugbankID|truncatewords:30|linebreaks }}
   {% endfor %}
+
 {% endblock %}

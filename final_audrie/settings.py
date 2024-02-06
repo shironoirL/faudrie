@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'druginfo.apps.DruginfoConfig',
+    'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [
@@ -77,8 +78,10 @@ WSGI_APPLICATION = 'final_audrie.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'audrie',
+        'USER': 'shironoir',
+        'PASSWORD': 'postgres',
     }
 }
 
