@@ -23,7 +23,6 @@ def drug_detail(request, id):
 class DrugListView(ListView):
     queryset = DrugInformation.published.all()
     context_object_name = 'drugs'
-    paginate_by = 5
     template_name = 'audrie/druginfo/list.html'
 
 def drug_search(request):
@@ -44,3 +43,10 @@ def drug_search(request):
                   {'form': form,
                    'query': query,
                    'results': results})
+
+
+
+# class mechanismOfActionListView(ListView):
+#     queryset = MechanismOfAction.objects.all()
+#     context_object_name = 'mechanisms'
+#     template_name = 'audrie/druginfo/list.html'

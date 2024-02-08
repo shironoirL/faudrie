@@ -5,4 +5,6 @@ from .models import DrugInformation
 class PostAdmin(admin.ModelAdmin):
     list_display = ['drugbankID', 'drugname', 'description', 'moleculeType']
 
-# Register your models here.
+# @admin.register(MechanismOfAction)
+# class PostAdmin(admin.ModelAdmin):
+#     list_display = ['mechanism','targetReceptor', 'humanReceptor', 'links']

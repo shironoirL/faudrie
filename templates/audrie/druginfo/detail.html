@@ -1,33 +1,22 @@
 {% extends "audrie/base.html" %}
 
-{% block title %}{{ drug.drugname }}{% endblock %}
+<head>{% block title %}{{ drug.drugname }}{% endblock %}</head>
 
 {% block content %}
   <h1>{{ drug.drugname }}</h1>
-    <table style="width:100%">
-    <style>
-   table {
-    width: 300px;
-    border: 1px solid green;
-    margin: auto;
-   }
-   td {
-    text-align: center;
-   }
-  </style>
-  <tr>
-    <th>drugbankID</th>
-    <th>Description</th>
-    <th>Confirmstatus</th>
-    <th>smiles</th>
-  </tr>
-  <tr>
-    <td>{{ drug.drugbankID|linebreaks }}</td>
-    <td>{{ drug.description|linebreaks }}</td>
-    <td>{{ drug.confirmStatus|linebreaks }}</td>
-      <td>{{ drug.smiles|linebreaks }}</td>
-  </tr>
-</table>
-
-
+    <body>
+    <p><b>Drugname</b>:   {{ drug.drugname}}</p>
+    <p><b>Drug description</b>:   {{ drug.description}}</p>
+    <p><b>Molecule type</b>:   {{ drug.moleculeType }}</p>
+    <p><b>Year of creation</b>:   {{ drug.yearOfDrug }}</p>
+    <p><b>Status</b>:   {{ drug.confirmStatus }}</p>
+    <p><b>More info to be determined</b></p>
+    </body>
+    <p>{{ mechaninisms.mechanism }}</p>
+    <p><b>SMILES:   </b>{{ drug.smiles }}</p>
+<img src="{{ drug.smilesimages.url  }}" alt="{{ drug.smiles }}" width="210" height="90">
+<p><b>Drugbank reference</b>:   {{ drug.drugbankReference }}</p>
+    <p><b>Dailymed reference</b>:   {{ drug.dailymedReference  }}</p>
+    <p><b>CHEMBL reference</b>:   {{ drug.chemBLReference }}</p>
 {% endblock %}
+

@@ -29,7 +29,10 @@ class DrugInformation(models.Model):
                               default=Status.DRAFT)
     objects = models.Manager()
     published = PublishedManager()
-
+    chemBLReference = models.CharField(max_length=250, default='somereference')
+    drugbankReference = models.CharField(max_length=250, default='somereference')
+    dailymedReference = models.CharField(max_length=250, default='somereference')
+    smilesimages = models.ImageField(upload_to='smilesimages/',null=True,blank=True)
 
     def __str__(self):
         return self.drugname
@@ -37,6 +40,18 @@ class DrugInformation(models.Model):
         return reverse('druginfo:drug_detail',
                        args=[self.id])
 
+# class MechanismOfAction(models.Model):
+#     mechanism = models.CharField(max_length=250)
+#     targetReceptor = models.CharField(max_length=250)
+#     humanReceptor = models.CharField(max_length=250)
+#     links = models.CharField(max_length=250)
+#
+#     def __str__(self):
+#         return self.mechanism
+#
+#     def get_absolute_url(self):
+#         return reverse('druginfo:drug_detail',
+#                        args=[self.id])
 
 
 
