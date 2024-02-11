@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from .models import DrugInformation
-from django.views.generic import ListView
+from .models import DrugInformation,MechanismOfAction
+from django.views.generic import ListView,DetailView
 from django.contrib.postgres.search import SearchVector
 from .forms import SearchForm
 from django.contrib.postgres.search import TrigramSimilarity
@@ -16,9 +16,10 @@ def drug_detail(request, id):
     drug = get_object_or_404(DrugInformation,
                              id=id,
                              status=DrugInformation.Status.PUBLISHED)
+    mechanism_of_action = drug.mechanismofaction_set.all()
     return render(request,
                   'audrie/druginfo/detail.html',
-                  {'drug': drug})
+                  {'drug': drug, 'mechanisms': mechanism_of_action})
 
 class DrugListView(ListView):
     queryset = DrugInformation.published.all()
@@ -46,7 +47,7 @@ def drug_search(request):
 
 
 
-# class mechanismOfActionListView(ListView):
-#     queryset = MechanismOfAction.objects.all()
-#     context_object_name = 'mechanisms'
-#     template_name = 'audrie/druginfo/list.html'
+def mechanism_of_action_detail(request, id):
+    drug = get_object_or_404(DrugInformation, id=id, status=DrugInformation.Status.PUBLISHED)
+    mechanism_of_action = drug.mechanismofaction_set.all()
+    return render(request, 'audrie/druginfo/mechanism.html', {'mechanisms': mechanism_of_action})
