@@ -64,6 +64,21 @@ class MechanismOfAction(models.Model):
                 img.save(img_path)
                 instance.smiles_image = img_path
 
+class useIndication(models.Model):
+    indicationInfo = models.CharField(max_length=250)
+    therapeuticInfo = models.CharField(max_length=250)
+    phase = models.PositiveIntegerField()
+    references = models.CharField(max_length=250)
+    drugbankID = models.ManyToManyField(DrugInformation)
+    def __str__(self):
+        return self.indicationInfo
+    def get_absolute_url(self):
+        return reverse('druginfo:drug_detail',
+                       args=[self.id])
+
+
+
+
 
 
 # Create your models here.

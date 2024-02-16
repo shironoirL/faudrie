@@ -1,15 +1,16 @@
 from django.shortcuts import render, get_object_or_404
-from .models import DrugInformation,MechanismOfAction
-from django.views.generic import ListView,DetailView
+from .models import DrugInformation, MechanismOfAction, useIndication
+from django.views.generic import ListView, DetailView
 from django.contrib.postgres.search import SearchVector
 from .forms import SearchForm
 from django.contrib.postgres.search import TrigramSimilarity
 
+
 def drug_list(request):
     drugs = DrugInformation.published.all()
     return render(request,
-                 'audrie/druginfo/list.html',
-                 {'drugs': drugs})
+                  'audrie/druginfo/list.html',
+                  {'drugs': drugs})
 
 
 def drug_detail(request, id):
@@ -17,9 +18,11 @@ def drug_detail(request, id):
                              id=id,
                              status=DrugInformation.Status.PUBLISHED)
     mechanism_of_action = drug.mechanismofaction_set.all()
+    indications = drug.useindication_set.all()
     return render(request,
                   'audrie/druginfo/detail.html',
-                  {'drug': drug, 'mechanisms': mechanism_of_action})
+                  {'drug': drug, 'mechanisms': mechanism_of_action, 'indications': indications})
+
 
 class DrugListView(ListView):
     queryset = DrugInformation.published.all()
@@ -36,7 +39,7 @@ def drug_search(request):
         if form.is_valid():
             query = form.cleaned_data['query']
             results = DrugInformation.published.annotate(
-            similarity=TrigramSimilarity('drugname', query),
+                similarity=TrigramSimilarity('drugname', query),
             ).filter(similarity__gt=0.1).order_by('-similarity')
 
     return render(request,
@@ -44,10 +47,3 @@ def drug_search(request):
                   {'form': form,
                    'query': query,
                    'results': results})
-
-
-
-def mechanism_of_action_detail(request, id):
-    drug = get_object_or_404(DrugInformation, id=id, status=DrugInformation.Status.PUBLISHED)
-    mechanism_of_action = drug.mechanismofaction_set.all()
-    return render(request, 'audrie/druginfo/mechanism.html', {'mechanisms': mechanism_of_action})

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import DrugInformation,MechanismOfAction
+from .models import DrugInformation,MechanismOfAction, useIndication
 
 @admin.register(DrugInformation)
 class PostAdmin(admin.ModelAdmin):
@@ -8,3 +8,7 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(MechanismOfAction)
 class PostAdmin(admin.ModelAdmin):
     list_display = ['mechanism','targetReceptor', 'humanReceptor', 'links']
+
+@admin.register(useIndication)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ['indicationInfo', 'therapeuticInfo', 'phase', 'references']

@@ -2,7 +2,7 @@
 {% block title %}Search{% endblock %}
 {% block content %}
 {% if query %}
-<h1>drugs containing "{{ query }}"</h1>
+<h1 xmlns:druginfo="http://www.w3.org/1999/xhtml" xmlns:druginfo="http://www.w3.org/1999/xhtml">drugs containing "{{ query }}"</h1>
 <h3>
 {% with results.count as total_results %}
 Found {{ total_results }} result{{ total_results|pluralize }}

@@ -19,11 +19,11 @@
     </body>
     <p>{{ mechaninisms.mechanism }}</p>
     <p><b>SMILES:   </b>{{ drug.smiles }}</p>
-{#<img src="{{ drug.smilesimages.url  }}" alt="{{ drug.smiles }}" width="210" height="90">#}
 <p><b>Drugbank reference</b>:   {{ drug.drugbankReference }}</p>
     <p><b>Dailymed reference</b>:   {{ drug.dailymedReference  }}</p>
     <p><b>CHEMBL reference</b>:   {{ drug.chemBLReference }}</p>
 <img src="{{ drug.smiles_image.url|slice:"6:" }}" alt="{{ drug.smiles }}" width="200" height="200">
+<hr style="border-width: 1px;">
     <h2>Mechanisms of Action:</h2>
     <table>
         <tr>
@@ -43,6 +43,42 @@
     </table>
 {#    <p><b>Mechanism:   </b>{{ mechanism.targetReceptor }}</p>#}
 {#    <p>{{ mechanism }}</p>#}
-{#    <a href="{% url 'mechanism_of_action_detail' id=drug.id %}">View Mechanism of Action</a>#}
-{% endblock %}
+<hr style="border-width: 1px;">
+    <head>
+    <title>Drug Information Detail</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ drug_info.drugname }}</h1>
 
+
+    <!-- Таблица для связанных назначений (useIndications) -->
+    <h2>Related Use Indications</h2>
+    <table>
+        <tr>
+            <th>Indication Info</th>
+            <th>Therapeutic Info</th>
+            <th>Phase</th>
+            <th>References</th>
+        </tr>
+        {% for indication in indications %}
+            <tr>
+                <td>{{ indication.indicationInfo }}</td>
+                <td>{{ indication.therapeuticInfo }}</td>
+                <td>{{ indication.phase }}</td>
+                <td>{{ indication.references }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+{% endblock %}

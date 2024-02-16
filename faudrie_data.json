@@ -1,31 +1,5 @@
 [
 {
-  "model": "admin.logentry",
-  "pk": 1,
-  "fields": {
-    "action_time": "2024-02-05T15:12:41.438Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "1",
-    "object_repr": "Propranolol",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 2,
-  "fields": {
-    "action_time": "2024-02-05T15:34:33.444Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "2",
-    "object_repr": "second drug",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -278,24 +252,6 @@
   }
 },
 {
-  "model": "auth.user",
-  "pk": 1,
-  "fields": {
-    "password": "pbkdf2_sha256$720000$aobm0jrmHy9aFqSwBFPEns$N3vu9WO0gIFUNSxtixn4FkQBDCo/fInc/dhcRJX3ahY=",
-    "last_login": "2024-02-05T14:58:51.421Z",
-    "is_superuser": true,
-    "username": "admin",
-    "first_name": "",
-    "last_name": "",
-    "email": "admin@gmail.com",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2024-02-05T14:58:20.029Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
   "model": "contenttypes.contenttype",
   "pk": 1,
   "fields": {
@@ -349,52 +305,6 @@
   "fields": {
     "app_label": "druginfo",
     "model": "druginformation"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "opx0kl8crpki7eklky26nthe09fgnoc3",
-  "fields": {
-    "session_data": ".eJxVjDsOgzAQRO_iOrJgjY2dMj1nsOzdIZBERuJTRbl7QKJIimnmvZm3imlbh7gtmOMo6qpqdfntcuInygHkkcp90jyVdR6zPhR90kV3k-B1O92_gyEtw74GE7XoLYwVkipzHUxAsM7AmpYFta8seQb2-D5L06AlCiE49g5Qny_1Qjhb:1rX0Qt:j4QR509BUJ9eCaejgUBKzH3ATwA0got1op5L3Uv4NMA",
-    "expire_date": "2024-02-19T14:58:51.426Z"
-  }
-},
-{
-  "model": "druginfo.druginformation",
-  "pk": 1,
-  "fields": {
-    "drugbankID": "123",
-    "drugname": "Propranolol",
-    "description": "some descript",
-    "moleculeType": "Small molecule",
-    "yearOfDrug": 123,
-    "confirmStatus": "Confirmed",
-    "drugFamily": "Betablockers",
-    "synonyms": "qwe",
-    "smiles": "CC(C)NCC(COC1=CC=CC2=CC=CC=C21)O",
-    "publish": "2024-02-05T15:12:14Z",
-    "created": "2024-02-05T15:12:41.437Z",
-    "updated": "2024-02-05T15:12:41.437Z",
-    "status": "PB"
-  }
-},
-{
-  "model": "druginfo.druginformation",
-  "pk": 2,
-  "fields": {
-    "drugbankID": "3",
-    "drugname": "second drug",
-    "description": "second descript",
-    "moleculeType": "big molecule",
-    "yearOfDrug": 2,
-    "confirmStatus": "Confirmed",
-    "drugFamily": "Betablockers",
-    "synonyms": "qwe",
-    "smiles": "CC(C)NCC(COC1=CC=CC2=CC=CC=C21)O",
-    "publish": "2024-02-05T15:34:02Z",
-    "created": "2024-02-05T15:34:33.442Z",
-    "updated": "2024-02-05T15:34:33.442Z",
-    "status": "PB"
   }
 }
 ]
