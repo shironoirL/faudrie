@@ -64,6 +64,55 @@ class MechanismOfAction(models.Model):
                 img.save(img_path)
                 instance.smiles_image = img_path
 
+class useIndication(models.Model):
+    indicationInfo = models.CharField(max_length=250)
+    therapeuticInfo = models.CharField(max_length=250)
+    phase = models.PositiveIntegerField()
+    references = models.CharField(max_length=250)
+    drugbankID = models.ManyToManyField(DrugInformation)
+    def __str__(self):
+        return self.indicationInfo
+    def get_absolute_url(self):
+        return reverse('druginfo:drug_detail',
+                       args=[self.id])
+
+class pathContribution(models.Model):
+    verbosePath = models.CharField(max_length=250)
+    length = models.PositiveIntegerField()
+    metaPath = models.CharField(max_length=20)
+    percentOfDWPC = models.DecimalField(max_digits = 5,decimal_places = 2)
+    percentOfPrediction = models.DecimalField(max_digits = 5,decimal_places = 2)
+    drugbankID = models.ForeignKey(DrugInformation, on_delete= models.CASCADE)
+
+class metapathContribution(models.Model):
+    verbose = models.CharField(max_length=250)
+    length = models.PositiveIntegerField()
+    pathCount = models.PositiveIntegerField()
+    percentOfPrediction = models.DecimalField(max_digits = 5,decimal_places = 2)
+    metaPath = models.CharField(max_length=250)
+    drugbankID = models.ForeignKey(DrugInformation, on_delete=models.CASCADE)
+
+class sourceEdgeContribution(models.Model):
+    sourceEdge = models.CharField(max_length=250)
+    percentOfPrediction = models.DecimalField(max_digits = 5,decimal_places = 2)
+    pathCount = models.PositiveIntegerField()
+    distinctMetaPaths = models.PositiveIntegerField()
+    drugbankID = models.ForeignKey(DrugInformation, on_delete=models.CASCADE)
+
+class targetEdge(models.Model):
+    targetEdge = models.CharField(max_length=250)
+    percentOfPrediction = models.DecimalField(max_digits = 5,decimal_places = 2)
+    pathCount = models.PositiveIntegerField()
+    distinctMetaPaths = models.PositiveIntegerField()
+    drugbankID = models.ForeignKey(DrugInformation, on_delete=models.CASCADE)
+
+
+
+
+
+
+
+
 
 
 # Create your models here.

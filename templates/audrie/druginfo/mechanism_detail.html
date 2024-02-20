@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mechanism of Action Detail</title>
+</head>
+<body>
+    <h1>{{ mechanism.mechanism }}</h1>
+    <p><strong>Target Receptor:</strong> {{ mechanism.targetReceptor }}</p>
+    <p><strong>Human Receptor:</strong> {{ mechanism.humanReceptor }}</p>
+    <p><strong>Links:</strong> {{ mechanism.links }}</p>
+
+    <!-- Вывод информации о связанных лекарственных средствах -->
+    <h2>Related Drug Information</h2>
+    <ul>
+        {% for drug_info in drug_info_list %}
+            <li>{{ drug_info.drugname }} - Drugbank ID: {{ drug_info.drugbankID }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

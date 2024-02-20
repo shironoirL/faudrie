@@ -1,15 +1,11 @@
 {% extends "audrie/base.html" %}
-    <style>
-        table {
-            margin: 0 auto; /* Центрируем таблицу по горизонтали */
-        }
-    </style>
-
-<head>{% block title %}{{ drug.drugname }}{% endblock %}</head>
-
+  <head>
+  </head>
+    <!-- Основная информация (DrugInformation) -->
 {% block content %}
   <h1>{{ drug.drugname }}</h1>
     <body>
+
     <p><b>Drugname</b>:   {{ drug.drugname}}</p>
     <p><b>Drug description</b>:   {{ drug.description}}</p>
     <p><b>Molecule type</b>:   {{ drug.moleculeType }}</p>
@@ -19,30 +15,134 @@
     </body>
     <p>{{ mechaninisms.mechanism }}</p>
     <p><b>SMILES:   </b>{{ drug.smiles }}</p>
-{#<img src="{{ drug.smilesimages.url  }}" alt="{{ drug.smiles }}" width="210" height="90">#}
+    <img src="{{ drug.smiles_image.url|slice:"6:" }}" alt="{{ drug.smiles }}" width="200" height="200">
 <p><b>Drugbank reference</b>:   {{ drug.drugbankReference }}</p>
     <p><b>Dailymed reference</b>:   {{ drug.dailymedReference  }}</p>
     <p><b>CHEMBL reference</b>:   {{ drug.chemBLReference }}</p>
-<img src="{{ drug.smiles_image.url|slice:"6:" }}" alt="{{ drug.smiles }}" width="200" height="200">
+
+
+    <!-- Таблица для механизмов (mechanismOfAction) -->
     <h2>Mechanisms of Action:</h2>
-    <table>
+<table class="table table-responsive table-hover">
+    <thead>
         <tr>
-            <th>Mechanism</th>
-            <th>Target Receptor</th>
-            <th>Human Receptor</th>
-            <th>Links</th>
+            <th scope="col">Mechanism</th>
+            <th scope="col">Target Receptor</th>
+            <th scope="col">Human Receptor</th>
+            <th scope="col">Links</th>
         </tr>
+    </thead>
+    <tbody>
         {% for mechanism in mechanisms %}
+        <tr>
+            <td>{{ mechanism.mechanism }}</td>
+            <td>{{ mechanism.targetReceptor }}</td>
+            <td>{{ mechanism.humanReceptor }}</td>
+            <td>{{ mechanism.links }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    <head>
+    <title>Drug Information Detail</title>
+</head>
+<body>
+
+    <!-- Таблица для связанных назначений (useIndications) -->
+    <h2>Related Use Indications</h2>
+<table class="table table-responsive table-hover">
+        <tr>
+            <th>Indication Info</th>
+            <th>Therapeutic Info</th>
+            <th>Phase</th>
+            <th>References</th>
+        </tr>
+        {% for indication in indications %}
             <tr>
-                <td>{{ mechanism.mechanism }}</td>
-                <td>{{ mechanism.targetReceptor }}</td>
-                <td>{{ mechanism.humanReceptor }}</td>
-                <td>{{ mechanism.links }}</td>
+                <td>{{ indication.indicationInfo }}</td>
+                <td>{{ indication.therapeuticInfo }}</td>
+                <td>{{ indication.phase }}</td>
+                <td>{{ indication.references }}</td>
             </tr>
         {% endfor %}
     </table>
-{#    <p><b>Mechanism:   </b>{{ mechanism.targetReceptor }}</p>#}
-{#    <p>{{ mechanism }}</p>#}
-{#    <a href="{% url 'mechanism_of_action_detail' id=drug.id %}">View Mechanism of Action</a>#}
-{% endblock %}
 
+
+<!-- Таблица pathContribution -->
+<h2>Path Contribution</h2>
+<table class="table table-responsive table-hover">
+        <tr>
+            <th>Verbose Path</th>
+            <th>Percent of Prediction</th>
+            <th>Percent of DWPC</th>
+            <th>Metapath</th>
+        </tr>
+        {% for path in pathContributions %}
+            <tr>
+                <td>{{ path.verbosePath }}</td>
+                <td>{{ path.percentOfPrediction }}%</td>
+                <td>{{ path.percentOfDWPC }}%</td>
+                <td>{{ path.metaPath }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+<!-- Таблица metapathContribution -->
+<h2>Metapath Contribution</h2>
+<table class="table table-responsive table-hover">
+        <tr>
+            <th>Metapath</th>
+            <th>Percent of Prediction</th>
+            <th>Path Count</th>
+            <th>Length</th>
+            <th>Verbose</th>
+        </tr>
+        {% for metapath in metapathContributions %}
+            <tr>
+                <td>{{ metapath.metaPath }}</td>
+                <td>{{ metapath.percentOfPrediction }}%</td>
+                <td>{{ metapath.pathCount }}%</td>
+                <td>{{ metapath.length }}</td>
+                <td>{{ metapath.verbose }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+<!-- Таблица Source Edge Contribution -->
+<h2>Source Edge Contribution</h2>
+<table class="table table-responsive table-hover">
+        <tr>
+            <th>Source Edge</th>
+            <th>Percent of Prediction</th>
+            <th>Path Count</th>
+            <th>Distinct metapaths</th>
+        </tr>
+        {% for sourceEdge in sourceEdgeContributions %}
+            <tr>
+                <td>{{ sourceEdge.sourceEdge }}</td>
+                <td>{{ sourceEdge.percentOfPrediction }}%</td>
+                <td>{{ sourceEdge.pathCount }}</td>
+                <td>{{ sourceEdge.distinctMetaPaths }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+<h2>Target Edge Contribution</h2>
+<!-- Таблица target edge Contribution -->
+<table class="table table-responsive table-hover">
+        <tr>
+            <th>Target Edge</th>
+            <th>Percent of Prediction</th>
+            <th>Path Count</th>
+            <th>Distinct metapaths</th>
+        </tr>
+        {% for targetEdge in targetEdges %}
+            <tr>
+                <td>{{ targetEdge.targetEdge }}</td>
+                <td>{{ targetEdge.percentOfPrediction }}%</td>
+                <td>{{ targetEdge.pathCount }}</td>
+                <td>{{ targetEdge.distinctMetaPaths }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+</body>
+ {% endblock %}
